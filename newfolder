@@ -1,0 +1,357 @@
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ KR32 bit   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace csharp_console_examples
+{
+    internal class Program
+    {
+        public static void leftRotate(int[] arr, int d, int n)
+        {
+            for (int i = 0; i < d; i++)
+                leftRotatebyOne(arr, n);
+        }
+        public static void leftRotatebyOne(int[] arr, int n)
+        {
+            int i, temp;
+            temp = arr[0];
+            for (i = 0; i < n - 1; i++)
+                arr[i] = arr[i + 1];
+            arr[i] = temp;
+        }
+        public static void RightRotate(int[] arr, int d, int n)
+        {
+            for (int i = 0; i < d; i++)
+                RightRotatebyone(arr, n);
+        }
+        public static void RightRotatebyone(int[] arr, int n)
+        {
+            int x = arr[n - 1];
+            for (int i = n - 1; i > 0; i--)
+            {
+                arr[i] = arr[i - 1];
+            }
+            arr[0] = x;
+        }
+        static int[] xor2(int[] x, int[] R)
+        {
+
+            int[] y = new int[32];
+
+            for (int i = 0; i < y.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    y[i + 1] = x[i] ^ R[i];
+                }
+                else
+                {
+                    y[i - 1] = x[i] ^ R[i];
+                }
+            }
+
+            return y;
+        }
+        static public int[] crosz2(int[] cr)
+        {
+            int[] z = new int[32];
+
+            z[0] = cr[0];
+            z[2] = cr[1];
+            z[4] = cr[2];
+            z[6] = cr[3];
+            z[8] = cr[4];
+            z[10] = cr[5];
+            z[12] = cr[6];
+            z[14] = cr[7];
+            z[16] = cr[8];
+
+            z[18] = cr[9];
+            z[20] = cr[10];
+            z[22] = cr[11];
+            z[24] = cr[12];
+            z[26] = cr[13];
+            z[28] = cr[14];
+            z[30] = cr[15];
+            z[31] = cr[16];
+
+            z[17] = cr[17];
+            z[29] = cr[18];
+            z[27] = cr[19];
+            z[25] = cr[20];
+            z[23] = cr[21];
+            z[21] = cr[22];
+
+            z[19] = cr[23];
+            z[15] = cr[24];
+            z[13] = cr[25];
+            z[11] = cr[26];
+            z[9] = cr[27];
+            z[7] = cr[28];
+
+            z[5] = cr[29];
+            z[3] = cr[30];
+            z[1] = cr[31];
+
+
+            return z;
+        }
+        static public int[] usualxor(int[] x, int[] y)
+        {
+            int[] z = new int[32];
+
+            for (int i = 0; i < z.Length; i++)
+            {
+                z[i] = x[i] ^ y[i];
+            }
+
+            return z;
+        }
+        static void Main(string[] args)
+        {
+
+            int[] m1 = { 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 };
+            int[] RIDS = { 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0 };
+            int[] xorkrkt = { 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0 };
+            int[] KT = { 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1 };
+            int c = 0;
+            Console.Write("**********************************************");
+            Console.Write("\n\nMessage1: ");
+            for (int i = 0; i < m1.Length; i++)
+            {
+                Console.Write(m1[i] + " ");
+            }
+            Console.Write("\n\nKT: ");
+            for (int i = 0; i < m1.Length; i++)
+            {
+                Console.Write(KT[i] + " ");
+            }
+            Console.Write("\n\n**********************************************");
+
+
+            Console.Write("\n\nEnter your n: ");
+
+            int no_of_rotations = Convert.ToInt32(Console.ReadLine());
+
+            leftRotate(m1, no_of_rotations, m1.Length);
+
+            Console.Write("\nCro(RIDS,KR): ");
+            for (int i = 0; i < m1.Length; i++)
+            {
+                Console.Write(m1[i] + " ");
+            }
+
+
+            Console.Write("\n\nRZ: ");
+            int[] result3 = new int[32];
+            result3 = crosz2(m1);
+
+            for (int i = 0; i < m1.Length; i++)
+            {
+                Console.Write(result3[i] + " ");
+            }
+
+            int[] resultxor = new int[32];
+            resultxor = xor2(RIDS, result3);
+            Console.Write("\n\nKR: ");
+            for (int i = 0; i < m1.Length; i++)
+            {
+                Console.Write(resultxor[i] + " ");
+            }
+
+
+            int[] resultktkr = new int[32];
+            resultktkr = usualxor(resultxor,xorkrkt);
+            Console.Write("\n\nKT: ");
+            for (int i = 0; i < m1.Length; i++)
+            {
+                Console.Write(resultktkr[i] + " ");
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\M1 32 bit \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+@@ -0,0 +1,177 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace csharp_console_examples
+{
+    internal class Program
+    {
+        public static void leftRotate(int[] arr, int d, int n)
+        {
+            for (int i = 0; i < d; i++)
+                leftRotatebyOne(arr, n);
+        }
+        public static void leftRotatebyOne(int[] arr, int n)
+        {
+            int i, temp;
+            temp = arr[0];
+            for (i = 0; i < n - 1; i++)
+                arr[i] = arr[i + 1];
+            arr[i] = temp;
+        }
+        public static void RightRotate(int[] arr, int d, int n)
+        {
+            for (int i = 0; i < d; i++)
+                RightRotatebyone(arr, n);
+        }
+        public static void RightRotatebyone(int[] arr, int n)
+        {
+            int x = arr[n - 1];
+            for (int i = n - 1; i > 0; i--)
+            {
+                arr[i] = arr[i - 1];
+            }
+            arr[0] = x;
+        }
+        static int[] xor(int[] x, int[] y)
+        {
+
+            int[] R = new int[32];
+
+            for (int i = 0; i < R.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    R[i] = x[i] ^ y[i + 1];
+                }
+                else
+                {
+                    R[i] = x[i] ^ y[i - 1];
+                }
+            }
+
+            return R;
+        }
+        static public int[] usualxor(int [] x, int[] y)
+        {
+            int[] z = new int[32];
+
+            for(int i=0;i<z.Length;i++)
+            {
+                z[i] = x[i] ^ y[i];
+            }
+
+            return z;
+        }
+        static public int[] crosz(int[] z)
+        {
+            int[] cr = new int[32];
+
+            cr[0] = z[0];
+            cr[1] = z[2];
+            cr[2] = z[4];
+            cr[3] = z[6];
+            cr[4] = z[8];
+            cr[5] = z[10];
+            cr[6] = z[12];
+            cr[7] = z[14];
+            cr[8] = z[16];
+            cr[9] = z[18];
+            cr[10] = z[20];
+            cr[11] = z[22];
+            cr[12] = z[24];
+            cr[13] = z[26];
+            cr[14] = z[28];
+            cr[15] = z[30];
+            cr[16] = z[31];
+            cr[17] = z[17];
+            cr[18] = z[29];
+            cr[19] = z[27];
+            cr[20] = z[25];
+            cr[21] = z[23];
+            cr[22] = z[21];
+            cr[23] = z[19];
+            cr[24] = z[15];
+            cr[25] = z[13];
+            cr[26] = z[11];
+            cr[27] = z[9];
+            cr[28] = z[7];
+            cr[29] = z[5];
+            cr[30] = z[3];
+            cr[31] = z[1];
+
+            return cr;
+        }
+
+        static void Main(string[] args)
+        {
+
+            int[] kr = { 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1 };
+            int[] RIDS = { 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0 };
+            int[] KT = { 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1 };
+            //int n = m1.Length;
+
+            Console.Write("**********************************************");
+            Console.Write("\nMessage1=Rot(Cro(RIDS,KR),n)");
+            Console.Write("\n\nRIDS: "); // RIDS 
+            for (int i = 0; i < RIDS.Length; i++)
+            {
+                Console.Write(RIDS[i] + " ");
+            }
+            Console.Write("\n\nKR: "); // RIDS 
+            for (int i = 0; i < kr.Length; i++)
+            {
+                Console.Write(kr[i] + " ");
+            }
+            Console.Write("\n\nKT: "); // RIDS 
+            for (int i = 0; i < kr.Length; i++)
+            {
+                Console.Write(KT[i] + " ");
+            }
+            Console.Write("\n\n**********************************************");
+
+
+            Console.Write("\n\nxor(RIDS,Kr): "); // 
+            int[] resultxor = new int[32];
+            resultxor = xor(RIDS, kr);
+            for (int i = 0; i < resultxor.Length; i++)
+            {
+                Console.Write(resultxor[i] + " ");
+            }
+
+            Console.Write("\n\ncros(RIDS,Kr): "); // 
+            int[] resultZ = new int[32];
+
+            resultZ = crosz(resultxor);
+            for (int i = 0; i < resultxor.Length; i++)
+            {
+                Console.Write(resultZ[i] + " ");
+            }
+            Console.Write("\n\nEnter your n: "); // 
+
+            int no_of_rotations = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("\nM1: ");
+
+            RightRotate(resultZ, no_of_rotations, 32); 
+
+            for (int i = 0; i < resultZ.Length; i++)
+            {
+                Console.Write(resultZ[i] + " ");
+            }
+
+            Console.Write("\n\nxor(kr,kt): ");
+        
+            int[] resultusualxor = new int[32];
+            resultusualxor = usualxor(kr,KT);
+            for (int i = 0; i < resultusualxor.Length; i++)
+            {
+                Console.Write(resultusualxor[i] + " ");
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
